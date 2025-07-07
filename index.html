@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小罗娜的主页</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo" id="logo">
+            <img src="images/logo.gif" alt="Logo" onclick="showPage('home')">
+        </div>
+        <div class="hamburger-menu">
+            <div class="hamburger-bar"></div>
+            <div class="hamburger-bar"></div>
+            <div class="hamburger-bar"></div>
+        </div>
+        <div class="menu">
+            <a href="#" class="menu-link" data-page="home">首页</a>
+            <a href="#" class="menu-link" data-page="about">关于</a>
+            <a href="#" class="menu-link" data-page="contact">联系</a>
+        </div>
+    </div>
+
+    <div class="page active" id="home">
+        <div class="content">
+            <img src="images/avatar.webp" alt="Avatar" class="avatar">
+            <div class="about-content">
+                <h1 style="color: #FE7BB5;">Hello!</h1>
+                <h2 style="color: #B3B1FE;">这里是小罗娜的主页~</h2><br>
+                <h3 style="color: #92CCFE;">落叶是秋天的邮戳，寄往无人认领的冬天。</h3>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="btn-container">
+                <a href="https://blog.sugar.moe" class="btn">BLOG</a>
+                <a href="https://x.com/xiaoplana" class="btn">Twitter</a>
+                <a href="https://github.com/xiaorona" class="btn">Github</a>
+                <a href="https://space.bilibili.com/9982886" class="btn">Bilibili</a>
+            </div>
+            <div>©2025 Xiaorona. <a href="https://icp.gov.moe/?keyword=20252255" target="_blank">萌ICP备20252255号</a></div>
+        </div>
+    </div>
+
+    <div class="page" id="about">
+        <div class="content">
+            <h1 id="about-title"></h1>
+            <div class="about-content">
+                <p>这里什么都没有~</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="contact">
+        <div class="content">
+            <h1 id="contact-title"></h1>
+            <div class="about-content">
+                <p>点击下方联系我~</p>
+            </div>
+            <div class="btn-container">
+                <a href="mailto:xiaorona@outlook.com" class="btn">Email</a>
+                <a href="https://t.me/Xiaorona" class="btn">Telegram</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
