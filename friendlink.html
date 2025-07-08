@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友情链接</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+    * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+        -webkit-tap-highlight-color: transparent;
+    }
+    html, body { height: 100%; touch-action: manipulation; }
+    body {
+        font-family: "LXGW WenKai Screen", sans-serif;
+        color: #333;
+        line-height: 1.6;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background: url('https://t.alcy.cc/moez') no-repeat center center fixed;
+        background-size: cover;
+        padding: 20px;
+        position: relative;
+    }
+    .container {
+        width: 100%;
+        max-width: 700px;
+        margin-top: 20px;
+        margin-bottom: 5vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .links-container {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+        width: 100%;
+        justify-items: center;
+    }
+    .friend-link {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+        border: 1px solid rgba(255,255,255,0.3);
+        width: 100%;
+        max-width: 500px;
+        height: 120px;
+        outline: none;
+    }
+    .friend-link:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        background: rgba(255, 255, 255, 0.85);
+    }
+    .avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+        border: 3px solid rgba(255,255,255,0.5);
+        flex-shrink: 0;
+        user-select: none;
+    }
+    .info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #2c3e50;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        user-select: none;
+    }
+    .desc {
+        color: #6c757d;
+        font-size: 0.85rem;
+        opacity: 0.9;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.4;
+        user-select: none;
+    }
+    .buttons-top {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 500px;
+        position: sticky;
+        top: 20px;
+        z-index: 10;
+        background: rgba(255,255,255,0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 10px;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #2c3e50;
+        border-radius: 16px;
+        text-decoration: none;
+        text-align: center;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.4);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        font-weight: 500;
+        cursor: pointer;
+        font-family: "LXGW WenKai Screen", sans-serif;
+        height: 36px;
+        box-sizing: border-box;
+        position: relative;
+        white-space: nowrap;
+        outline: none;
+        user-select: none;
+    }
+    .btn:hover {
+        background: rgba(255, 255, 255, 0.8);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .email-menu-container {
+        position: relative;
+    }
+    .email-menu {
+        position: fixed;
+        top: calc(10vh + 100px);
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        opacity: 0;
+        visibility: hidden;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 30;
+        font-family: "LXGW WenKai Screen", sans-serif;
+        transition: all 0.3s ease;
+        width: calc(100vw - 40px);
+        max-width: 500px;
+        box-sizing: border-box;
+        outline: none;
+    }
+    .email-menu.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+    .text-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px 12px;
+        background: rgba(255,255,255,0.7);
+        border-radius: 8px;
+        width: 100%;
+    }
+    .info-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        cursor: pointer;
+        width: 100%;
+        user-select: none;
+    }
+    .info-row:last-child {
+        margin-bottom: 0;
+    }
+    .label {
+        font-size: 0.8rem;
+        color: #6c757d;
+        user-select: none;
+    }
+    .content {
+        font-size: 0.9rem;
+        color: #2c3e50;
+        word-break: break-all;
+        flex: 1;
+        user-select: none;
+    }
+    .copy-btn {
+        background: transparent;
+        border: none;
+        color: #6c757d;
+        cursor: pointer;
+        margin-left: 8px;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        padding: 0;
+        outline: none;
+        user-select: none;
+    }
+    .copy-btn:hover {
+        color: #2c3e50;
+    }
+    .toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 100;
+        font-family: "LXGW WenKai Screen", sans-serif;
+        user-select: none;
+    }
+    .toast.show {
+        opacity: 1;
+    }
+    .footer-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 16px;
+        color: #2c3e50;
+        text-decoration: none;
+        font-size: 0.8rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border: 1px solid rgba(255,255,255,0.3);
+        transition: all 0.3s ease;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .footer-btn:hover {
+        background: rgba(255, 255, 255, 0.85);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .footer-btn i {
+        font-size: 0.9rem;
+    }
+    .loading {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        user-select: none;
+    }
+    @media (min-width: 768px) {
+        .links-container {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .email-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 500px;
+        }
+        .email-menu.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+    @media (max-width: 600px) {
+        .container {
+            max-width: 100%;
+            margin-top: 15px;
+            padding: 15px;
+        }
+        .friend-link {
+            height: 100px;
+            padding: 12px;
+        }
+        .avatar {
+            width: 70px;
+            height: 70px;
+            margin-right: 12px;
+        }
+        .buttons-top {
+            margin-bottom: 15px;
+            top: 15px;
+        }
+        .email-menu {
+            top: calc(15px + 90px);
+            width: calc(100vw - 30px);
+        }
+        .footer-btn {
+            bottom: 15px;
+            right: 15px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="buttons-top">
+            <a href="/index.html" class="btn">返回主站</a>
+            <div class="email-menu-container">
+                <button id="toggleEmail" class="btn">添加友链</button>
+                <div id="emailMenu" class="email-menu">
+                    <div class="text-info">
+                        <div class="info-row" data-copy="xiaorona@qq.com">
+                            <div class="content">联系邮箱：xiaorona@qq.com</div>
+                            <button class="copy-btn"><i class="fas fa-clone"></i></button>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">添加友链请发送到我的邮箱</div>
+                        </div>
+                        <div class="info-row" data-copy="xiaorona">
+                            <div class="content">昵称：小罗娜/xiaorona</div>
+                            <button class="copy-btn"><i class="fas fa-clone"></i></button>
+                        </div>
+                        <div class="info-row" data-copy="https://blog.sugar.moe/images/avatar.webp">
+                            <div class="content">头像：https://blog.sugar.moe/images/avatar.webp</div>
+                            <button class="copy-btn"><i class="fas fa-clone"></i></button>
+                        </div>
+                        <div class="info-row" data-copy="https://www.sugar.moe">
+                            <div class="content">链接：https://www.sugar.moe</div>
+                            <button class="copy-btn"><i class="fas fa-clone"></i></button>
+                        </div>
+                        <div class="info-row" data-copy="回首向来萧瑟处，也无风雨也无晴。">
+                            <div class="content">简介：回首向来萧瑟处，也无风雨也无晴。</div>
+                            <button class="copy-btn"><i class="fas fa-clone"></i></button>
+                        </div>
+                        <div class="info-row">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="links-container" id="linksContainer">
+            <div class="loading">加载友链中...</div>
+        </div>
+    </div>
+    
+    <a href="https://t.alcy.cc/moez" target="_blank" class="footer-btn" rel="noopener noreferrer">
+        <i class="fas fa-image"></i>栗次元API
+    </a>
+    
+    <div id="toast" class="toast">已复制到剪切板</div>
+    
+    <script>
+        const TRUSTED_DOMAINS = [
+            'www.sugar.moe',
+            'blog.sugar.moe'
+        ];
+
+        async function loadFriendLinks() {
+            try {
+                const response = await fetch('friendlinks.json');
+                if (!response.ok) throw new Error('网络响应不正常');
+                
+                const links = await response.json();
+                const container = document.getElementById('linksContainer');
+                
+                if (links.length === 0) {
+                    container.innerHTML = '<p class="loading">暂无友链</p>';
+                    return;
+                }
+                
+                container.innerHTML = '';
+                links.forEach(link => {
+                    const linkEl = document.createElement('a');
+                    linkEl.className = 'friend-link';
+                    linkEl.href = link.url;
+                    linkEl.target = "_blank";
+                    linkEl.rel = "noopener noreferrer";
+                    linkEl.innerHTML = `
+                        <img src="${link.avatar}" alt="${link.name}" class="avatar" onerror="this.src='https://via.placeholder.com/80'">
+                        <div class="info">
+                            <div class="name">${link.name}</div>
+                            <div class="desc">${link.desc}</div>
+                        </div>
+                    `;
+                    container.appendChild(linkEl);
+                });
+            } catch (error) {
+                console.error('加载友链失败:', error);
+                document.getElementById('linksContainer').innerHTML = `
+                    <div class="loading">
+                        <p>友链加载失败</p>
+                        <button onclick="loadFriendLinks()" class="btn">重试</button>
+                    </div>
+                `;
+            }
+        }
+
+        function handleSafeRedirect(url) {
+            try {
+                const domain = new URL(url).hostname;
+                const isTrusted = TRUSTED_DOMAINS.some(d => 
+                    domain === d || domain.endsWith(`.${d}`)
+                );
+                
+                if (isTrusted) {
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                } else {
+                    console.warn('跳转未经验证域名:', domain);
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                    showToast(`跳转到新域名: ${domain}`, 2000);
+                }
+            } catch (err) {
+                console.error('链接解析失败:', err);
+                showToast('无效的链接地址', 3000);
+            }
+        }
+
+        function showToast(message, duration = 2000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), duration);
+        }
+
+        const toggleBtn = document.getElementById('toggleEmail');
+        const emailMenu = document.getElementById('emailMenu');
+        let isMenuVisible = false;
+
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleEmailMenu();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!emailMenu.contains(e.target) && e.target !== toggleBtn && isMenuVisible) {
+                toggleEmailMenu();
+            }
+        });
+
+        emailMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const copyElement = e.target.closest('[data-copy]');
+            if (copyElement) {
+                const text = copyElement.getAttribute('data-copy');
+                copyToClipboard(text);
+                showToast('已复制到剪切板');
+            }
+        });
+
+        function toggleEmailMenu() {
+            isMenuVisible = !isMenuVisible;
+            emailMenu.classList.toggle('show', isMenuVisible);
+            toggleBtn.textContent = isMenuVisible ? '收起菜单' : '添加友链';
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFriendLinks();
+        });
+    </script>
+</body>
+</html>
