@@ -14,6 +14,20 @@ document.addEventListener('DOMContentLoaded', function() {
         contact: "联系我"
     };
 
+    function updateUptime() {
+        const start = new Date('2025-06-01T16:30:00');
+        const now = new Date();
+        const diff = now - start;
+        const days = Math.floor(diff / 864e5);
+        const hours = Math.floor(diff % 864e5 / 36e5);
+        const minutes = Math.floor(diff % 36e5 / 6e4);
+        const seconds = Math.floor(diff % 6e4 / 1e3);
+        const uptimeElement = document.getElementById('uptime');
+        if(uptimeElement) uptimeElement.textContent = `${days}天${hours}小时${minutes}分${seconds}秒`;
+    }
+    setInterval(updateUptime, 1000);
+    updateUptime();
+
     menuBtn.addEventListener('click', () => {
         menuBtn.classList.toggle('active');
         menu.classList.toggle('active');
